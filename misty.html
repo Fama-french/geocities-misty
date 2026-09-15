@@ -147,24 +147,23 @@
   </ul>
 </div>
 
-<div class="webring">
-  <p>🐱 PROUD MEMBER OF THE CUTE CAT WEBRING 🐱</p>
-  <p>[ &lt;&lt; PREV ] [ RANDOM ] [ NEXT &gt;&gt; ]</p>
-</div>
-
-<div class="webring">
-  <p>🐈 MEMBER OF THE STRAY CATS OF THE WORLD WEBRING 🐈</p>
-  <p>[ &lt;&lt; PREV ] [ RANDOM ] [ NEXT &gt;&gt; ]</p>
-</div>
-
-<div class="webring">
-  <p>💾 GEOCITIES REVIVAL WEBRING 💾</p>
-  <p>[ &lt;&lt; PREV ] [ RANDOM ] [ NEXT &gt;&gt; ]</p>
-</div>
-
-<div class="webring">
-  <p>🌈 FOREVER LOVED PETS WEBRING 🌈</p>
-  <p>[ &lt;&lt; PREV ] [ RANDOM ] [ NEXT &gt;&gt; ]</p>
+<div class="webringRow">
+  <div class="webring">
+    <p>🐱 CUTE CAT WEBRING</p>
+    <p>[ &lt;&lt; ] [ ⚄ ] [ &gt;&gt; ]</p>
+  </div>
+  <div class="webring">
+    <p>🐈 STRAY CATS WEBRING</p>
+    <p>[ &lt;&lt; ] [ ⚄ ] [ &gt;&gt; ]</p>
+  </div>
+  <div class="webring">
+    <p>💾 GEOCITIES REVIVAL</p>
+    <p>[ &lt;&lt; ] [ ⚄ ] [ &gt;&gt; ]</p>
+  </div>
+  <div class="webring">
+    <p>🌈 FOREVER LOVED PETS</p>
+    <p>[ &lt;&lt; ] [ ⚄ ] [ &gt;&gt; ]</p>
+  </div>
 </div>
 
 <div class="constructionBox">
@@ -201,6 +200,13 @@
     });
   }
 
+  async function bumpVisitorCount() {
+    const { data } = await db.rpc("increment_visits");
+    if (typeof data === "number") {
+      document.getElementById("counterNum").textContent = String(data).padStart(6, "0");
+    }
+  }
+
   document.getElementById("guestbookForm").addEventListener("submit", async (e) => {
     e.preventDefault();
     const name = document.getElementById("gbName").value.trim();
@@ -213,6 +219,7 @@
   });
 
   loadGuestbook();
+  bumpVisitorCount();
 </script>
 
 </body>
