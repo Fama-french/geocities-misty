@@ -1,0 +1,149 @@
+/* PAGE 1 - CHARACTER SELECT - looks like an old DOS army game */
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #1b1712;
+  background-image:
+    linear-gradient(rgba(10,8,6,0.35), rgba(10,8,6,0.35)),
+    url('images/bg-military.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  color: #e8e0d0;
+  font-family: 'Press Start 2P', monospace;
+  text-align: center;
+}
+
+.topbar {
+  background: #000;
+  color: #ff3b3b;
+  font-size: 10px;
+  padding: 8px 4px;
+  border-bottom: 4px solid #ff3b3b;
+  letter-spacing: 1px;
+}
+
+.title {
+  color: #ff3b3b;
+  font-size: 22px;
+  margin: 24px 10px;
+  text-shadow: 3px 3px 0 #000;
+}
+
+.roster {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 20px;
+  flex-wrap: wrap;
+  padding: 10px 20px 30px;
+}
+
+.card {
+  background: #2b241c;
+  border: 4px solid #6b5a3f;
+  padding: 16px;
+  width: 220px;
+  text-decoration: none;
+  color: #e8e0d0;
+  display: block;
+}
+
+.card:hover {
+  border-color: #ff3b3b;
+  box-shadow: 0 0 0 4px #000, 0 0 0 8px #ff3b3b;
+}
+
+.portrait {
+  width: 100%;
+  height: 220px;
+  margin-bottom: 12px;
+  overflow: hidden;
+  image-rendering: pixelated;
+}
+
+.portrait img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  image-rendering: pixelated;
+}
+
+.card h2 {
+  font-size: 16px;
+  margin: 10px 0 4px;
+  color: #fff;
+}
+
+.card .rank {
+  font-size: 9px;
+  color: #ff3b3b;
+  margin: 0 0 14px;
+}
+
+.card .stat {
+  font-size: 9px;
+  text-align: left;
+  margin: 6px 0;
+  color: #a9cf5f;
+}
+
+.card.kj .portrait {
+  filter: hue-rotate(280deg) saturate(1.4);
+}
+
+.card.kj:hover {
+  border-color: #ff6fd8;
+  box-shadow: 0 0 0 4px #000, 0 0 0 8px #ff6fd8;
+}
+
+.card.kj:hover .stat,
+.card.kj:hover h2,
+.card.kj:hover .rank {
+  color: #ff6fd8;
+}
+
+.selectbar {
+  background: #000;
+  border-top: 4px solid #ff3b3b;
+  padding: 14px 4px 24px;
+  font-size: 11px;
+}
+
+.selectbar p {
+  margin: 6px 0;
+}
+
+.gameOverTitle {
+  color: #ff3b3b;
+  font-size: 36px;
+  animation: blinkRed 1s steps(1) infinite;
+}
+
+@keyframes blinkRed {
+  50% { color: #ffffff; }
+}
+
+.gameOverVideoBox {
+  max-width: 640px;
+  margin: 0 auto 20px;
+  border: 4px solid #ff3b3b;
+  box-shadow: 0 0 0 4px #000;
+  padding: 6px;
+  background: #000;
+}
+
+.gameOverVideoBox video {
+  width: 100%;
+  display: block;
+}
+
+.retryLink {
+  color: #a9cf5f;
+  text-decoration: none;
+}
+
+.retryLink:hover {
+  color: #ff3b3b;
+}
