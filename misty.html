@@ -51,7 +51,7 @@
 </marquee>
 
 <h1 class="mainTitle">🌈 MISTY'S HOMEPAGE 🌈</h1>
-<p class="subTitle">~*~ in loving memory of the best stray cat ever ~*~</p>
+<p class="subTitle">~*~ in loving memory of the best cuddle-bug ever ~*~</p>
 
 <div class="counter">
   YOU ARE VISITOR NUMBER: <span class="counterNum">004242</span>
@@ -61,7 +61,7 @@
 
 <div class="photoGrid">
   <div class="photoFrame">
-    <img src="images/cat1.jpg" alt="Misty the cat">
+    <img src="images/cat1.jpg" alt="Misty the cat" style="object-position: 50% 15%;">
     <p>Misty on a walk</p>
   </div>
   <div class="photoFrame">
@@ -120,6 +120,7 @@
     <textarea id="gbMessage" placeholder="say hi to Misty!" maxlength="300" required></textarea>
     <button type="submit">SIGN GUESTBOOK</button>
   </form>
+  <p id="guestbookCount" class="guestbookCount"></p>
   <div id="guestbookEntries" class="guestbookEntries"></div>
 </div>
 
@@ -128,9 +129,11 @@
 <div class="aboutBox">
   <h2>ABOUT MISTY</h2>
   <p>
-    Misty started out as a stray who wandered in one day and never really
-    left. She turned out to be the cutest, sweetest girl in the whole wide
-    world. She isn't with us anymore, but she'll always be part of the
+    Misty was a moggy, born to our cat Nougatine (also a moggy) — we never
+    knew who the father was. She loved cuddles and loved wandering around,
+    and she'd make the most beautiful noise when you scratched her. She'd
+    curl up right next to you, or climb onto your lap hoping for a taste
+    of butter. She isn't with us anymore, but she'll always be part of the
     family and this page will always be hers.
   </p>
   <p class="blinkText">✨ FOREVER IN OUR HEARTS ✨</p>
@@ -153,7 +156,7 @@
     <p>[ &lt;&lt; ] [ ⚄ ] [ &gt;&gt; ]</p>
   </div>
   <div class="webring">
-    <p>🐈 STRAY CATS WEBRING</p>
+    <p>🐈 MOGGY CATS WEBRING</p>
     <p>[ &lt;&lt; ] [ ⚄ ] [ &gt;&gt; ]</p>
   </div>
   <div class="webring">
@@ -188,9 +191,14 @@
 
   async function loadGuestbook() {
     const { data } = await db.from("guestbook").select("*").order("created_at", { ascending: false });
+    const entries = data || [];
     const list = document.getElementById("guestbookEntries");
+    const count = document.getElementById("guestbookCount");
+    count.textContent = entries.length === 0
+      ? "be the first to sign!"
+      : entries.length + " " + (entries.length === 1 ? "person has" : "people have") + " signed:";
     list.innerHTML = "";
-    (data || []).forEach((entry) => {
+    entries.forEach((entry) => {
       const p = document.createElement("p");
       const strong = document.createElement("strong");
       strong.textContent = entry.name + ": ";
@@ -217,6 +225,10 @@
     document.getElementById("gbMessage").value = "";
     loadGuestbook();
   });
+
+  db.channel("guestbook-live")
+    .on("postgres_changes", { event: "INSERT", schema: "public", table: "guestbook" }, loadGuestbook)
+    .subscribe();
 
   loadGuestbook();
   bumpVisitorCount();

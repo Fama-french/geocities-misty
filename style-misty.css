@@ -250,6 +250,11 @@ body {
   cursor: pointer;
 }
 
+.guestbookCount {
+  font-weight: bold;
+  margin: 10px 0 0;
+}
+
 .guestbookEntries {
   margin-top: 16px;
   text-align: left;
