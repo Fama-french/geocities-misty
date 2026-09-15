@@ -140,6 +140,19 @@ body {
   border-color: #ffd23f;
 }
 
+.hiddenSection {
+  display: none;
+}
+
+.hiddenSection:target {
+  display: block;
+}
+
+.closeLink {
+  color: #a3006b;
+  font-size: 12px;
+}
+
 .slideshow {
   max-width: 500px;
   margin: 0 auto;
